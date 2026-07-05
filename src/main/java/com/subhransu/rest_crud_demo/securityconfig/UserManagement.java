@@ -42,6 +42,12 @@ public class UserManagement {
                 .roles("EMPLOYEE","ADMIN").build();
 
 
+        UserDetails user4= User.builder()
+                .username("santa")
+                .password("{noop}2302140")
+                .roles("EMPLOYEE","ADMIN").build();
+
+
 //        Collection<UserDetails>collection=new ArrayList<>();
 //
 //        collection.add(user1);
