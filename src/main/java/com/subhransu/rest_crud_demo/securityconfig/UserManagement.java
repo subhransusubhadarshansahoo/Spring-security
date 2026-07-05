@@ -64,7 +64,7 @@ public class UserManagement {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http){
-
+        System.out.println("this security filter is now handel by the spring boot ");
         System.out.println("security filter is added successfully");
 
         http.authorizeHttpRequests(
