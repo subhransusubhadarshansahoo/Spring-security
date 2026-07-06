@@ -39,7 +39,7 @@ public class UserManagement {
         UserDetails user3= User.builder()
                 .username("ronak")
                 .password("{noop}2302140")
-                .roles("EMPLOYEE","ADMIN").build();
+                .roles("EMPLOYEE","MANAGER","ADMIN").build();
 
 
         UserDetails user4= User.builder()
@@ -81,7 +81,9 @@ public class UserManagement {
                         .requestMatchers(HttpMethod.GET,"/api/employees/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST,"/api/employees").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.PUT,"/api/employees/**").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.PATCH,"/api/employees/**").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.DELETE,"/api/employees/**").hasRole("ADMIN")
+
 
 
 
