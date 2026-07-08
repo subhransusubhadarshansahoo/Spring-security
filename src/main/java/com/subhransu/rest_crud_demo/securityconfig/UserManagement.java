@@ -8,9 +8,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,51 +23,60 @@ public class UserManagement {
 
     
 
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-
-
-     UserDetails user1= User.builder()
-                .username("roshan")
-                .password("{noop}2302165")
-                .roles("EMPLOYEE").build();    //CONSTRUCTOR CHAINING
-
-        UserDetails user2= User.builder()
-                .username("subhra")
-                .password("{noop}2302163")
-                .roles("EMPLOYEE","MANAGER").build();
-
-
-        UserDetails user3= User.builder()
-                .username("ronak")
-                .password("{noop}2302140")
-                .roles("EMPLOYEE","MANAGER","ADMIN").build();
-
-
-        UserDetails user4= User.builder()
-                .username("santa")
-                .password("{noop}2302140")
-                .roles("EMPLOYEE","ADMIN").build();
-
-
-//        Collection<UserDetails>collection=new ArrayList<>();
+//    @Bean
+//    public InMemoryUserDetailsManager userDetailsManager() {
 //
-//        collection.add(user1);
+//
+//     UserDetails user1= User.builder()
+//                .username("roshan")
+//                .password("{noop}2302165")
+//                .roles("EMPLOYEE").build();    //CONSTRUCTOR CHAINING
+//
+//        UserDetails user2= User.builder()
+//                .username("subhra")
+//                .password("{noop}2302163")
+//                .roles("EMPLOYEE","MANAGER").build();
+//
+//
+//        UserDetails user3= User.builder()
+//                .username("ronak")
+//                .password("{noop}2302140")
+//                .roles("EMPLOYEE","MANAGER","ADMIN").build();
+//
+//
+//        UserDetails user4= User.builder()
+//                .username("santa")
+//                .password("{noop}2302140")
+//                .roles("EMPLOYEE","ADMIN").build();
+//
+//
+////        Collection<UserDetails>collection=new ArrayList<>();
+////
+////        collection.add(user1);
+//
+//
+//        ArrayList<UserDetails> list=new ArrayList<>();
+//        list.add(user1);
+//        list.add(user2);
+//        list.add(user3);
+//
+//        return new InMemoryUserDetailsManager(list);
+//
+//
+//
+//
+//
+//    }
 
 
-        ArrayList<UserDetails> list=new ArrayList<>();
-        list.add(user1);
-        list.add(user2);
-        list.add(user3);
-
-        return new InMemoryUserDetailsManager(list);
 
 
+    @Bean
+    public UserDetailsManager userDetailsManager(DataSource dataSource){
 
 
-
+        return new JdbcUserDetailsManager(dataSource);
     }
-
 
 
     @Bean
